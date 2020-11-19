@@ -1,0 +1,24 @@
+{% extends 'studentblog/base.html' %}
+{% block content %}
+<div class="col-sm-10">
+        <h3 class="text-white">
+        HomePage
+        </h3>
+<div class="jumbotron jumbotron-fluid">
+{%if post%}
+{% for item in post %}
+        <div class="container">
+                <h1 class="display-4 font-weight-bold">{{item.title}}</h1>
+                 <span class="font-weight-bold">By:{{item.author}}</span>
+                <p class="lead text-justify">{{item.desc}}</p>
+                <div class="card-body">
+                {{item.created}}
+                </div>
+        </div>
+{% endfor %}
+{% else %}
+<h1 class="display-4 font-weight-bold">No Post Available</h1>
+{%endif%}
+</div>
+</div>
+{% endblock content %}

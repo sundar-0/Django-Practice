@@ -1,0 +1,66 @@
+{% extends 'studentblog/base.html' %}
+{% block content %}
+<div class="col-sm-4">
+<h1 class="text-light font-weight-bold mr-5">Welcome {{user.username}}</h1>
+</div>
+<div class="col-sm-8">
+        <form action="" method="post">
+        {% csrf_token %}
+        {% for fm in form  %}
+        <span class="text-light font-weight-bold">{{fm.label_tag}}</span>
+        <p>{{fm}}</p>
+        {% endfor %}
+        <input type="submit" class="btn btn-primary" value="Add">
+        </form><br>
+        {% if messages %}
+        <div class="alert alert-success">
+        {%for msg in messages%}
+        {% if msg %}  {{msg}}{% endif %}
+        {%endfor%}
+        </div>
+        {% endif %}
+  
+</div>
+{% if userpost %}
+<div class="col-sm-4">
+
+</div>
+<div class="col-sm-8">
+<h1 class="text-light font-weight-bold mr-5">Your Post:</h1>
+<table class="table table-light table-hover table-responsive">
+
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Created</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in userpost %}
+    <tr>
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.title}}</td>
+      <td>{{item.desc}}</td>
+      <td>{{item.created}}</td>
+      <td>
+      {%if perms.studentblog.change_post%}
+      <a href="{% url 'edit_blog' item.id%}" class="btn btn-warning btn-sm">Edit</a>
+      {% endif %}
+      {%if perms.studentblog.delete_post%}
+       <form action="{% url 'delete_blog' item.id%}" method="POST">
+       {% csrf_token %}
+         <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+       </form>
+       {%endif%}
+      </td>
+    </tr>
+ {% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'studentapp/base.html' %}
+{% block heading %}
+Update student {{id}}
+{% endblock heading %}
+{% block content %}
+<div class="container">
+<form action="" method="post">
+{% csrf_token %}
+{{form.as_p}}
+<input type="submit" class="btn btn-primary" value="update">
+<a href="{%url 'addshow'%}" class="btn btn-secondary">Back</a>
+</form>
+
+</div>
+{% endblock content %}

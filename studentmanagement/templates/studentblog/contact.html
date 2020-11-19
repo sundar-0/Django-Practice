@@ -1,0 +1,23 @@
+{% extends 'studentblog/base.html' %}
+{% block content %}
+<div class="col-sm-10">
+        <h3 class="text-white">
+        Contact Page
+        </h3>
+    <form>
+    <label for="Name">Your Name</label>
+    <div class="form-group">
+    <input type="text" name="username" class="form-control">
+    </div>
+    <label for="Email">Your Email</label>
+    <div class="form-group">
+    <input type="email" class="form-control" name="useremail">
+    </div>
+    <label for="Message">Your Query</label>
+    <div class="form-group">
+    <textarea name="message" class="form-control"></textarea>
+    </div>
+    <input type="submit" value="Send" class="btn btn-primary">
+    </form>
+</div>
+{% endblock content %}

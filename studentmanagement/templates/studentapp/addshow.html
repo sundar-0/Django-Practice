@@ -1,0 +1,59 @@
+{% extends 'studentapp/base.html' %}
+{% block heading %}
+Add Student
+{% endblock heading %}
+Add Student
+{% block content %}
+<form action="" method="POST">
+{% csrf_token %}
+{{form.as_p}}
+<input type="submit" class="btn btn-primary" value="Add"/>
+</form>
+{% if messages %}
+{% for message in messages %}
+{% if message.tags %}
+<div class="alert alert-{{message.tags}} mt-2 w-50">{{message}}</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+<div class="container mt-2">
+{% if student %}
+<div class="alert alert-warning"><h4>Student Data</h4></div>
+<table class="table  table-responsive table-hover">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">student_name</th>
+      <th scope="col">roll</th>
+      <th scope="col">contact</th>
+      <th scope="col">email</th>
+      <th scope="col">faculty</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for st in student  %}
+   <tr>
+      <th scope="row">{{st.id}}</th>
+      <td>{{st.stu_name}}</td>
+      <td>{{st.stu_roll}}</td>
+      <td>{{st.stu_contact}}</td>
+      <td>{{st.stu_email}}</td>
+      <td>{{st.stu_faculty}}</td>
+      <td>
+      <a href="{%url 'updatestudent' st.id%}" class="btn btn-warning btn-sm">Edit</a>
+      <form action="{%url 'deletestudent' st.id%}" method="POST" class="d-inline">
+      {% csrf_token %}
+      <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+      </form>
+      </td>
+    </tr>
+  {% endfor %}
+   
+  </tbody>
+</table>
+{% else %}
+<div class="alert alert-warning">No Records Found</div>
+{% endif %}
+</div>
+{% endblock content %}

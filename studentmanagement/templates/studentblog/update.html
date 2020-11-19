@@ -1,0 +1,15 @@
+{% extends 'studentblog/base.html' %}
+{% block content %}
+<div class="col-sm-20">
+<form action="" method="post">
+{% csrf_token %}
+{% for fm in form %}
+{{fm.label_tag}}
+<div class="form-group">
+{{fm}}
+</div>
+{% endfor %}
+<input type="submit" class="btn btn-primary" value="update">
+</form>
+</div>
+{% endblock content %}
